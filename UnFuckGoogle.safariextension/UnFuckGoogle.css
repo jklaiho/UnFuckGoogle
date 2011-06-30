@@ -1,0 +1,35 @@
+/*
+UnFuckGoogle Safari Extension v1.0 by JK Laiho (jklaiho@iki.fi)
+
+This stylesheet removes annoying stuff from Google.
+
+Current features (more features in UnFuckGoogle.js):
+* Restores the white background on the top navigation bar
+* Hides the occasional prompt to add your Twitter account to your Google
+  Profile
+
+*/
+div#gb > div {
+    background-color: transparent !important;
+}
+
+#gbz .gbzt, #gbz .gbgt, #gbg .gbgt {
+    color: black !important;
+}
+
+.gbts {
+    color: black !important;
+}
+
+.gbzt-hvr, .gbzt:focus, .gbgt-hvr, .gbgt:focus {
+    background-color: #E5E5E5 !important;
+}
+
+.gbts #gbi5 {
+    background-position-x: -6px !important;
+    background-position-y: -22px !important;
+}
+
+.so.soi {
+    display: none !important;
+}
