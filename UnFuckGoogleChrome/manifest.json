@@ -1,0 +1,14 @@
+{
+    "name": "UnFuckGoogle",
+    "version": 1.0,
+    "description": "Removes various annoyances from Google",
+    "content_scripts": [
+        {"matches": ["<all_urls>"],
+         "include_globs": ["http*://*.google.*/*"],
+         "exclude_globs": ["http*://mail.*"],
+         "js": ["UnFuckGoogleBase.js", "UnFuckGoogleChrome.js"],
+         "css": ["UnFuckGoogle.css"],
+         "run_at": "document_end"
+        }
+        ]
+}
