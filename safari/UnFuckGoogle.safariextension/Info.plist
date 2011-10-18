@@ -13,9 +13,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>1.1.1</string>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.1.1</string>
 	<key>Chrome</key>
 	<dict/>
 	<key>Content</key>
@@ -24,7 +24,11 @@
 		<dict>
 			<key>End</key>
 			<array>
-				<string>UnFuckGoogle.js</string>
+				<string>end.js</string>
+			</array>
+			<key>Start</key>
+			<array>
+				<string>start.js</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>

@@ -12,48 +12,62 @@ distDirs = {
 }
 
 coffeeSources = {
-    'safari': [
-        'UnFuckGoogle.coffee'
-        "safari/run.coffee"
-    ]
-    'chrome': [
-        'UnFuckGoogle.coffee'
-        "chrome/run.coffee"
-    ]
+    'safari': {
+        'start': [
+            'UnFuckGoogleStart.coffee'
+            "safari/start.coffee"
+        ]
+        'end': [
+            'UnFuckGoogleEnd.coffee'
+            "safari/end.coffee"
+        ]
+    }
+    'chrome': {
+        'start': [
+            'UnFuckGoogleStart.coffee'
+            "chrome/run.coffee"
+        ]
+        'end': [
+            'UnFuckGoogleEnd.coffee'
+            "chrome/end.coffee"
+        ]
+    }
 }
 
-build = (target) ->
-    if not coffeeSources.hasOwnProperty(target) then throw "Invalid target: #{target}"
+build = (browser) ->
+    if not coffeeSources.hasOwnProperty(browser) then throw "Invalid target: #{browser}"
     buildDirExists = false
     try
-        if fs.statSync(buildDirs[target]).isDirectory() then buildDirExists = true
+        if fs.statSync(buildDirs[browser]).isDirectory() then buildDirExists = true
     catch error then # do nothing
-    if not buildDirExists then fs.mkdirSync(buildDirs[target])
-    buildDir = buildDirs[target]
+    if not buildDirExists then fs.mkdirSync(buildDirs[browser])
+    buildDir = buildDirs[browser]
     
     # Concatenate the files listed in coffeeSources and compile the output
     # into JavaScript
-    fileContents = []
-    remaining = coffeeSources[target].length
-    
-    for file, i in coffeeSources[target] then do (file, i) ->
-        fs.readFile(file, 'utf8', (err, contents) ->
-            throw err if err
-            fileContents[i] = contents
-            return process(target, buildDir) if --remaining == 0
-        )
-    
-    process = (target, buildDir) ->
-        fs.writeFile("#{buildDir}/_#{target}_temp.coffee", fileContents.join('\n\n'), 'utf8', (err) -> 
-            throw err if err
-            exec("coffee -c #{buildDir}/_#{target}_temp.coffee", (err, stdout, stderr) ->
+    fileContents = {}
+    remaining = {}
+    for target, sources of coffeeSources[browser] then do (target, sources) ->
+        fileContents[target] = []
+        remaining[target] = sources.length
+        for file, i in sources then do (file, i) ->
+            fs.readFile(file, 'utf8', (err, contents) ->
                 throw err if err
-                console.log(stdout + stderr) if stdout or stderr
-                fs.rename("#{buildDir}/_#{target}_temp.js", "#{buildDir}/UnFuckGoogle.js", (err) -> throw err if err)
-                fs.unlink("#{buildDir}/_#{target}_temp.coffee", (err) -> throw err if err)
+                fileContents[target][i] = contents
+                return process(target, buildDir) if --remaining[target] == 0
             )
-        )
-        exec("cp UnFuckGoogle.css #{buildDir}/", (err) -> throw err if err)
+        
+        process = (target, buildDir) ->
+            fs.writeFile("#{buildDir}/_#{browser}_#{target}_temp.coffee", fileContents[target].join('\n\n'), 'utf8', (err) -> 
+                throw err if err
+                exec("coffee -c #{buildDir}/_#{browser}_#{target}_temp.coffee", (err, stdout, stderr) ->
+                    throw err if err
+                    console.log(stdout + stderr) if stdout or stderr
+                    fs.rename("#{buildDir}/_#{browser}_#{target}_temp.js", "#{buildDir}/#{target}.js", (err) -> throw err if err)
+                    fs.unlink("#{buildDir}/_#{browser}_#{target}_temp.coffee", (err) -> throw err if err)
+                )
+            )
+            exec("cp UnFuckGoogle.css #{buildDir}/", (err) -> throw err if err)
 
 task('build_safari', "Prepare #{buildDirs['safari']}/ for Extension Builder processing", ->
     build('safari')
@@ -80,14 +94,16 @@ task('clean', "Remove the products of any previous build runs (successful or fai
     chrBd = buildDirs['chrome']
     [
         "#{safBd}/UnFuckGoogle.css"
-        "#{safBd}/UnFuckGoogle.js"
-        "#{safBd}/_safari_temp.coffee"
-        "#{safBd}/_safari_temp.js"
+        "#{safBd}/_safari_start_temp.coffee"
+        "#{safBd}/_safari_end_temp.coffee"
+        "#{safBd}/_safari_start_temp.js"
+        "#{safBd}/_safari_end_temp.js"
         
         "#{chrBd}/UnFuckGoogle.css"
-        "#{chrBd}/UnFuckGoogle.js"
-        "#{chrBd}/_chrome_temp.coffee"
-        "#{chrBd}/_chrome_temp.js"
+        "#{chrBd}/_chrome_start_temp.coffee"
+        "#{chrBd}/_chrome_start_temp.js"
+        "#{chrBd}/_chrome_end_temp.coffee"
+        "#{chrBd}/_chrome_end_temp.js"
     ].map(rm)
 )
 
