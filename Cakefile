@@ -58,13 +58,14 @@ build = (browser) ->
             )
         
         process = (target, buildDir) ->
-            fs.writeFile("#{buildDir}/_#{browser}_#{target}_temp.coffee", fileContents[target].join('\n\n'), 'utf8', (err) -> 
+            tempName = "_#{browser}_#{target}_temp"
+            fs.writeFile("#{buildDir}/#{tempName}.coffee", fileContents[target].join('\n\n'), 'utf8', (err) -> 
                 throw err if err
-                exec("coffee -c #{buildDir}/_#{browser}_#{target}_temp.coffee", (err, stdout, stderr) ->
+                exec("coffee -c #{buildDir}/#{tempName}.coffee", (err, stdout, stderr) ->
                     throw err if err
                     console.log(stdout + stderr) if stdout or stderr
-                    fs.rename("#{buildDir}/_#{browser}_#{target}_temp.js", "#{buildDir}/#{target}.js", (err) -> throw err if err)
-                    fs.unlink("#{buildDir}/_#{browser}_#{target}_temp.coffee", (err) -> throw err if err)
+                    fs.rename("#{buildDir}/#{tempName}.js", "#{buildDir}/#{target}.js", (err) -> throw err if err)
+                    fs.unlink("#{buildDir}/#{tempName}.coffee", (err) -> throw err if err)
                 )
             )
             exec("cp UnFuckGoogle.css #{buildDir}/", (err) -> throw err if err)
@@ -94,12 +95,16 @@ task('clean', "Remove the products of any previous build runs (successful or fai
     chrBd = buildDirs['chrome']
     [
         "#{safBd}/UnFuckGoogle.css"
+        "#{safBd}/start.js"
+        "#{safBd}/end.js"
         "#{safBd}/_safari_start_temp.coffee"
         "#{safBd}/_safari_end_temp.coffee"
         "#{safBd}/_safari_start_temp.js"
         "#{safBd}/_safari_end_temp.js"
         
         "#{chrBd}/UnFuckGoogle.css"
+        "#{chrBd}/start.js"
+        "#{chrBd}/end.js"
         "#{chrBd}/_chrome_start_temp.coffee"
         "#{chrBd}/_chrome_start_temp.js"
         "#{chrBd}/_chrome_end_temp.coffee"
