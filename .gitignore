@@ -1,5 +1,10 @@
 _*_*_temp.*
 safari/dist/UnFuckGoogle.safariextz
-*/*/UnFuckGoogle.css
-*/*/start.js
-*/*/end.js
+chrome/build/UnFuckGoogle.crx
+chrome/build/UnFuckGoogle.pem
+# Ignore build products and copies of the CSS...
+UnFuckGoogle.css
+start.js
+end.js
+# ...but don't ignore the master CSS file at repo root
+!/UnFuckGoogle.css

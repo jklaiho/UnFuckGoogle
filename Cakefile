@@ -1,14 +1,18 @@
 fs      = require('fs')
 {exec}  = require('child_process')
 
+# Chrome is stupid about the target dirs of packaged extensions. If built in
+# the directory named below, the .crx and .pem files will end up in
+# chrome/build (the parent directory) with no option of changing the output
+# path. For this reason, chrome/build is also the dist directory.
 buildDirs = {
     'safari': 'safari/UnFuckGoogle.safariextension'
-    'chrome': 'chrome'
+    'chrome': 'chrome/build/UnFuckGoogle'
 }
 
 distDirs = {
     'safari': 'safari/dist'
-    'chrome': 'chrome/dist'
+    'chrome': 'chrome/build'
 }
 
 coffeeSources = {
@@ -25,7 +29,7 @@ coffeeSources = {
     'chrome': {
         'start': [
             'UnFuckGoogleStart.coffee'
-            "chrome/run.coffee"
+            "chrome/start.coffee"
         ]
         'end': [
             'UnFuckGoogleEnd.coffee'
@@ -75,9 +79,9 @@ task('build_safari', "Prepare #{buildDirs['safari']}/ for Extension Builder proc
     console.log("Safari build complete. Now run the Extension Builder on #{buildDirs['safari']}")
 )
 
-task('build_chrome', "Prepare #{buildDirs['chrome']}/ for TODO processing", ->
-    # build('chrome')
-    # console.log("Chrome build complete. Now TODO the TODO")
+task('build_chrome', "Prepare #{buildDirs['chrome']}/ for Extension Manager processing", ->
+    build('chrome')
+    console.log("Chrome build complete. Now run the Extension Manager on #{buildDirs['chrome']}")
 )
 
 task('build', "Prepare the Safari and Chrome build directories for distributable extension creation", ->
@@ -112,10 +116,12 @@ task('clean', "Remove the products of any previous build runs (successful or fai
     ].map(rm)
 )
 
-task('clean_dist', "Remove the distributable extensions created by Chrome and Safari out of the build products", ->
+task('clean_dist', "Remove the distributable extensions created by Chrome and Safari extension machinery", ->
+    # Only remove the generated packages, not the update mechanism files
     [
-        # Only remove the .safariextz file, not UnFuckGoogle.plist since that's
-        # created by hand, not by Extension Builder
         "#{distDirs['safari']}/UnFuckGoogle.safariextz"
+        # The .pem file is ignored by git, no need to delete. Makes future
+        # updates using the private key easier.
+        "#{distDirs['chrome']}/UnFuckGoogle.crx"
     ].map(rm)
 )

@@ -1,0 +1,23 @@
+{
+    "name": "UnFuckGoogle",
+    "version": "1.1.1",
+    "description": "Removes various annoyances from Google",
+    "update_url": "http://jklaiho.net/UnFuckGoogle/chrome/updates.xml",
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "include_globs": ["http*://*.google.*/*"],
+            "exclude_globs": ["http*://mail.*"],
+            "js": ["start.js"],
+            "css": ["UnFuckGoogle.css"],
+            "run_at": "document_end"
+        },
+        {
+            "matches": ["<all_urls>"],
+            "include_globs": ["http*://*.google.*/*"],
+            "exclude_globs": ["http*://mail.*"],
+            "js": ["end.js"],
+            "run_at": "document_idle"
+        }
+    ]
+}
