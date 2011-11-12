@@ -1,5 +1,10 @@
 UnFuckGoogleEnd = ->
     PREVIEW_CLASSDEF = 'vspib'
+    REDIRECT_CLASSDEFS = ['r', 'fc']
+    
+    #
+    # Preview functionality removal
+    #
     
     removePreviewActivators = (divs) ->
         if divs.length > 0
@@ -15,3 +20,15 @@ UnFuckGoogleEnd = ->
         newPreviewActivators = document.getElementsByClassName(PREVIEW_CLASSDEF)
         removePreviewActivators(newPreviewActivators)
     document.addEventListener('DOMNodeInsertedIntoDocument', showMorePreviewRemoval, true)
+    
+    #
+    # Result link to onmousedown-toggled google.com redirect removal
+    #
+    
+    removeRedirectOnmousedowns = (containers) ->
+        for cls in REDIRECT_CLASSDEFS
+            containers = document.getElementsByClassName(cls)
+            for container in containers
+                for link in container.getElementsByTagName('a')
+                    link.removeAttribute('onmousedown')
+    document.addEventListener('DOMNodeInsertedIntoDocument', removeRedirectOnmousedowns, true)

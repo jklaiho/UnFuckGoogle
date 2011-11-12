@@ -10,6 +10,8 @@ The current features are as follows:
   * remove +1 buttons
   * disable page previews
   * remove the prompts to add your Twitter account to your Google profile
+  * remove history-breaking onmousedown handlers from result links that
+    transform the original link into a google.com redirect
 * Global:
   * restore the top navigation bar to its original white background
 
