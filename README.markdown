@@ -25,4 +25,4 @@ Extension Builder (Safari) and Extension Management (Chrome). See Apple's and
 Google's developer documentation for details.
 
 For more information and a downloadable version of the extension, go to
-[http://jklaiho.net/UnFuckGoogle/](http://jklaiho.net/UnFuckGoogle/)
+[http://jklaiho.net/projects/UnFuckGoogle/](http://jklaiho.net/projects/UnFuckGoogle/)
