@@ -33,5 +33,9 @@ div#gbx3 {
 }
 
 #cnt #center_col, #cnt #foot, #cnt .ab_center_col {
-    width: auto;
+    width: auto !important;
+}
+
+.s {
+    max-width: 48em !important;
 }

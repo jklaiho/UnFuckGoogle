@@ -26,8 +26,6 @@ UnFuckGoogle = ->
     removeRedirectOnmousedowns()
     document.addEventListener('DOMNodeInsertedIntoDocument', removeRedirectOnmousedowns, true)
     
-    document.getElementsByClassName('gbzt gbz0l')[0].className = 'gbzt'
-    
     #
     # +1 Button removal
     #

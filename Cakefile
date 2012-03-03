@@ -18,13 +18,16 @@ distDirs = {
 coffeeSources = {
     'safari': {
         'UnFuckGoogle': [
-            "safari/preflight.coffee"
+            'safari/preflight.coffee'
             'UnFuckGoogle.coffee'
         ]
-    }
+    },
     'chrome': {
+        'UnFuckGoogleSetup': [
+            'chrome/setup.coffee'
+        ],
         'UnFuckGoogle': [
-            "chrome/preflight.coffee"
+            'chrome/preflight.coffee'
             'UnFuckGoogle.coffee'
         ]
     }
@@ -96,7 +99,10 @@ task('clean', "Remove the products of any previous build runs (successful or fai
         "#{safBd}/_safari_UnFuckGoogle_temp.js"
         
         "#{chrBd}/UnFuckGoogle.css"
+        "#{chrBd}/UnFuckGoogleSetup.js"
         "#{chrBd}/UnFuckGoogle.js"
+        "#{chrBd}/_chrome_UnFuckGoogleSetup_temp.coffee"
+        "#{chrBd}/_chrome_UnFuckGoogleSetup_temp.js"
         "#{chrBd}/_chrome_UnFuckGoogle_temp.coffee"
         "#{chrBd}/_chrome_UnFuckGoogle_temp.js"
     ].map(rm)
