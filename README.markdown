@@ -12,6 +12,7 @@ The current features are as follows:
   * remove the prompts to add your Twitter account to your Google profile
   * remove history-breaking onmousedown handlers from result links that
     transform the original link into a google.com redirect
+  * restore Cached and Similar links to their original position
 * Global:
   * restore the top navigation bar to its original white background
 

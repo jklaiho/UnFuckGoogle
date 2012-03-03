@@ -1,9 +1,9 @@
-/* UnFuckGoogle Safari/Chrome Extension v1.1 by JK Laiho (jklaiho@iki.fi) */
-div#gb > div {
-    background-color: transparent !important;
+/* UnFuckGoogle Safari/Chrome Extension by JK Laiho (jklaiho@iki.fi) */
+div#gbx3 {
+    background-color: white !important;
 }
 
-#gbz .gbzt, #gbz .gbgt, #gbg .gbgt {
+#gbz .gbzt, #gbz .gbgt {
     color: black !important;
 }
 
@@ -15,15 +15,23 @@ div#gb > div {
     background-color: #E5E5E5 !important;
 }
 
-.gbts #gbi5 {
-    background-position-x: -6px !important;
-    background-position-y: -22px !important;
-}
-
-.so.soi {
-    display: none !important;
-}
-
 .vspib {
     display: none !important;
+}
+
+.vshid {
+    display:inline !important;
+}
+
+.vshid:before {
+    content: " - ";
+}
+
+.vshid a {
+    color: #12C !important;
+    text-decoration: none !important;
+}
+
+#cnt #center_col, #cnt #foot, #cnt .ab_center_col {
+    width: auto;
 }

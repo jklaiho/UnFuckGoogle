@@ -5,4 +5,4 @@ if window.top == window
     subdomain = document.domain.split('.')[0]
     if tehGoogles.test(document.domain)
         window.onload = ->
-            UnFuckGoogleEnd()
+            UnFuckGoogle()

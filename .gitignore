@@ -4,7 +4,6 @@ chrome/build/UnFuckGoogle.crx
 chrome/build/UnFuckGoogle.pem
 # Ignore build products and copies of the CSS...
 UnFuckGoogle.css
-start.js
-end.js
+UnFuckGoogle.js
 # ...but don't ignore the master CSS file at repo root
 !/UnFuckGoogle.css

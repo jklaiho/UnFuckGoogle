@@ -17,23 +17,15 @@ distDirs = {
 
 coffeeSources = {
     'safari': {
-        'start': [
-            'UnFuckGoogleStart.coffee'
-            "safari/start.coffee"
-        ]
-        'end': [
-            'UnFuckGoogleEnd.coffee'
-            "safari/end.coffee"
+        'UnFuckGoogle': [
+            "safari/preflight.coffee"
+            'UnFuckGoogle.coffee'
         ]
     }
     'chrome': {
-        'start': [
-            'UnFuckGoogleStart.coffee'
-            "chrome/start.coffee"
-        ]
-        'end': [
-            'UnFuckGoogleEnd.coffee'
-            "chrome/end.coffee"
+        'UnFuckGoogle': [
+            "chrome/preflight.coffee"
+            'UnFuckGoogle.coffee'
         ]
     }
 }
@@ -99,20 +91,14 @@ task('clean', "Remove the products of any previous build runs (successful or fai
     chrBd = buildDirs['chrome']
     [
         "#{safBd}/UnFuckGoogle.css"
-        "#{safBd}/start.js"
-        "#{safBd}/end.js"
-        "#{safBd}/_safari_start_temp.coffee"
-        "#{safBd}/_safari_end_temp.coffee"
-        "#{safBd}/_safari_start_temp.js"
-        "#{safBd}/_safari_end_temp.js"
+        "#{safBd}/UnFuckGoogle.js"
+        "#{safBd}/_safari_UnFuckGoogle_temp.coffee"
+        "#{safBd}/_safari_UnFuckGoogle_temp.js"
         
         "#{chrBd}/UnFuckGoogle.css"
-        "#{chrBd}/start.js"
-        "#{chrBd}/end.js"
-        "#{chrBd}/_chrome_start_temp.coffee"
-        "#{chrBd}/_chrome_start_temp.js"
-        "#{chrBd}/_chrome_end_temp.coffee"
-        "#{chrBd}/_chrome_end_temp.js"
+        "#{chrBd}/UnFuckGoogle.js"
+        "#{chrBd}/_chrome_UnFuckGoogle_temp.coffee"
+        "#{chrBd}/_chrome_UnFuckGoogle_temp.js"
     ].map(rm)
 )
 
